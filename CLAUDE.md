@@ -2,6 +2,66 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+<system_tools>
+
+# 💻 SYSTEM_TOOL_INVENTORY
+
+### 🛠 CORE UTILITIES: Search, Analysis & Refactoring
+
+- **ripgrep** (`rg`) `v14.1.0`
+  - **Context:** Primary text search engine.
+  - **Capabilities:** Ultra-fast regex search, ignores `.gitignore` by default.
+- **fd** (`fd`) `v10.3.0`
+  - **Context:** File system traversal.
+  - **Capabilities:** User-friendly, fast alternative to `find`.
+- **fzf** (`fzf`) `v0.67.0`
+  - **Context:** Interactive filtering.
+  - **Capabilities:** General-purpose command-line fuzzy finder.
+- **tokei** (`tokei`) `v12.1.2`
+  - **Context:** Codebase Statistics.
+  - **Capabilities:** Rapidly counts lines of code (LOC), comments, and blanks across all languages.
+- **ast-grep** (`sg`) `v0.40.0`
+  - **Context:** Advanced Refactoring & Linting.
+  You are operating in an environment where ast-grep is installed. For any code search that requires understanding of syntax or code structure, you should default to using ast-grep --lang [language] -p '<pattern>'. Adjust the --lang flag as needed for the specific programming language. Avoid using text-only search tools unless a plain-text search is explicitly requested.
+  - **Capabilities:** Structural code search and transformation using Abstract Syntax Trees (AST). Supports precise pattern matching and large-scale automated refactoring beyond regex limitations.
+- **bat** (`bat`) `v0.26.0`
+  - **Context:** File Reading.
+  - **Capabilities:** `cat` clone with automatic syntax highlighting and Git integration.
+- **sd** (`sd`) `v1.0.0`
+  - **Context:** Text Stream Editing.
+  - **Capabilities:** Intuitive find & replace tool (simpler `sed` replacement).
+- **jq** (`jq`) `v1.8.1`
+  - **Context:** JSON Parsing.
+  - **Capabilities:** Command-line JSON processor/filter.
+- **yq** (`yq`) `v4.48.2`
+  - **Context:** Structured Data Parsing.
+  - **Capabilities:** Processor for YAML, TOML, and XML.
+- **Semgrep** (`semgrep`) `v1.140.0`
+  - **Capabilities:** Polyglot Static Application Security Testing (SAST) and logic checker.
+
+### 🐍 PYTHON EXCLUSIVES: Primary Development Stack
+
+*Environment: 3.13.7*
+
+- **Python** (`python`) `v3.13.7`
+  - **Capabilities:** Core language runtime.
+- **uv / pip** (`uv`) `Latest`
+  - **Capabilities:** Package management. `uv` is the preferred ultra-fast Rust-based installer.
+- **Ruff** (`ruff`) `v0.14.1`
+  - **Capabilities:** High-performance linter and formatter. Replaces Flake8, isort, and Pylint.
+- **Black** (`black`) `Latest`
+  - **Capabilities:** Deterministic code formatter.
+- **Pyright** (`pyright`) `v1.1.407`
+  - **Capabilities:** Static type checker (Strict Mode enabled).
+
+### 🌐 SECONDARY RUNTIMES
+
+- **Node.js** (`node`) `v24.11.1` - JavaScript runtime.
+- **Bun** (`bun`) `v1.3.1` - All-in-one JS runtime, bundler, and test runner.
+- **Java** (`java`) `JDK 25 & 8` - Java Development Kit.
+
+</system_tools>
+
 ## Project Overview
 
 A Java-based dating application using **Spring Boot 3.5.9** with **Vaadin 24.5.5** for the UI. The app implements a swipe-based matching system where users can like/pass on profiles, and matched users can chat.

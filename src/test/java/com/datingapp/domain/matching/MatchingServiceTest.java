@@ -122,6 +122,6 @@ class MatchingServiceTest {
         Profile p = new Profile(id, name, "Bio",
                 LocalDate.now().minusYears(25), Collections.emptySet(),
                 null, new Location(lat, lon), List.of("url"));
-        return new User(id, p);
+        return new User(id, name.toLowerCase().replaceAll("\\s+", "_"), p);
     }
 }

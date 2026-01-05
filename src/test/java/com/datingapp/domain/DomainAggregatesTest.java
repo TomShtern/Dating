@@ -16,7 +16,7 @@ class DomainAggregatesTest {
     void user_shouldHandleStateTransitions() {
         UserId id = UserId.generate();
         Profile incompleteProfile = new Profile(id, null, null, null, null, null, null, null);
-        User user = new User(id, incompleteProfile);
+        User user = new User(id, "testuser", incompleteProfile);
 
         assertEquals(UserState.PROFILE_INCOMPLETE, user.getState());
         assertFalse(user.canSwipe());

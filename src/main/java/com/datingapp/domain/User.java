@@ -9,13 +9,18 @@ import java.util.Objects;
  */
 public class User {
     private final UserId id;
+    private final String username;
     private Profile profile;
     private UserState state;
     private final Instant createdAt;
     private Instant updatedAt;
 
-    public User(UserId id, Profile profile) {
-        this.id = Objects.requireNonNull(id);
+    public User(UserId id, String username, Profile profile) {
+        this.id = Objects.requireNonNull(id, "UserId cannot be null");
+        this.username = Objects.requireNonNull(username, "Username cannot be null");
+        if (username.isBlank()) {
+            throw new IllegalArgumentException("Username cannot be blank");
+        }
         this.profile = profile;
         this.state = profile != null && profile.isComplete()
                 ? UserState.ACTIVE
@@ -27,12 +32,16 @@ public class User {
     /**
      * Factory method for creating a new user with a generated ID.
      */
-    public static User create(Profile profile) {
-        return new User(UserId.generate(), profile);
+    public static User create(String username, Profile profile) {
+        return new User(UserId.generate(), username, profile);
     }
 
     public UserId getId() {
         return id;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public Profile getProfile() {

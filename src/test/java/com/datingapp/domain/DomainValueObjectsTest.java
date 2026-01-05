@@ -18,6 +18,52 @@ class DomainValueObjectsTest {
     }
 
     @Test
+    void userId_shouldBeEqualWhenSameUUID() {
+        UUID uuid = UUID.randomUUID();
+        UserId id1 = UserId.of(uuid);
+        UserId id2 = UserId.of(uuid);
+
+        assertEquals(id1, id2);
+        assertEquals(id1.hashCode(), id2.hashCode());
+    }
+
+    @Test
+    void userId_shouldNotBeEqualWhenDifferentUUID() {
+        UserId id1 = UserId.generate();
+        UserId id2 = UserId.generate();
+
+        assertNotEquals(id1, id2);
+    }
+
+    @Test
+    void swipeId_shouldGenerateUniqueIds() {
+        SwipeId id1 = SwipeId.generate();
+        SwipeId id2 = SwipeId.generate();
+
+        assertNotNull(id1.value());
+        assertNotNull(id2.value());
+        assertNotEquals(id1, id2, "Generated SwipeIds should be unique");
+    }
+
+    @Test
+    void swipeId_shouldRejectNull() {
+        NullPointerException ex = assertThrows(NullPointerException.class,
+                () -> new SwipeId(null));
+
+        assertEquals("SwipeId cannot be null", ex.getMessage());
+    }
+
+    @Test
+    void swipeId_shouldBeEqualWhenSameUUID() {
+        UUID uuid = UUID.randomUUID();
+        SwipeId id1 = new SwipeId(uuid);
+        SwipeId id2 = new SwipeId(uuid);
+
+        assertEquals(id1, id2);
+        assertEquals(id1.hashCode(), id2.hashCode());
+    }
+
+    @Test
     void matchId_shouldBeCanonical() {
         UserId idA = UserId.of(UUID.fromString("00000000-0000-0000-0000-000000000001"));
         UserId idB = UserId.of(UUID.fromString("00000000-0000-0000-0000-000000000002"));

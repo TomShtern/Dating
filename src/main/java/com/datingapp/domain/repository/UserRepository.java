@@ -14,9 +14,13 @@ import com.datingapp.domain.UserId;
 public interface UserRepository {
     Optional<User> findById(UserId id);
 
+    Optional<User> findByUsername(String username);
+
     void save(User user);
 
     List<User> findDiscoverableInRadius(Location center, Distance radius, int limit);
 
     boolean existsById(UserId id);
+
+    boolean existsByUsername(String username);
 }

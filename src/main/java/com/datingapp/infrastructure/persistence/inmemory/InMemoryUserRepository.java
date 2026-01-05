@@ -24,6 +24,13 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
+    public Optional<User> findByUsername(String username) {
+        return storage.values().stream()
+                .filter(u -> u.getUsername().equals(username))
+                .findFirst();
+    }
+
+    @Override
     public void save(User user) {
         storage.put(user.getId(), user);
     }
@@ -41,5 +48,11 @@ public class InMemoryUserRepository implements UserRepository {
     @Override
     public boolean existsById(UserId id) {
         return storage.containsKey(id);
+    }
+
+    @Override
+    public boolean existsByUsername(String username) {
+        return storage.values().stream()
+                .anyMatch(u -> u.getUsername().equals(username));
     }
 }
