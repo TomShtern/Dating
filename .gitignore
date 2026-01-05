@@ -1,0 +1,13 @@
+target/
+build/
+*.class
+*.jar
+*.war
+*.log
+.idea/
+*.iml
+.vscode/
+.DS_Store
+node_modules/
+frontend/node_modules/
+jar-resources/

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!--                          PARENT: SPRING BOOT                            -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>4.0.1</version>
+    <relativePath />
+  </parent>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!--                          PROJECT COORDINATES                            -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <groupId>com.datingapp</groupId>
+  <artifactId>dating-app</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <name>Dating App</name>
+  <description>A Java-based dating application with Spring Boot and Vaadin</description>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!--                              PROPERTIES                                 -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <properties>
+    <java.version>21</java.version>
+    <vaadin.version>25.0.2</vaadin.version>
+  </properties>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!--                             DEPENDENCIES                                -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <dependencies>
+    <!-- Spring Boot Web (REST API + Embedded Tomcat) -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!-- Spring Data JPA (Database access via Hibernate ORM) -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+
+    <!-- Spring Security (Authentication & Authorization) -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+
+    <!-- Spring Validation (Input validation with @Valid, @NotNull, etc.) -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+
+    <!-- Vaadin (Pure Java UI Framework) -->
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin-spring-boot-starter</artifactId>
+    </dependency>
+
+    <!-- PostgreSQL JDBC Driver -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!--                         TEST DEPENDENCIES                           -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!--                        DEPENDENCY MANAGEMENT                            -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-bom</artifactId>
+        <version>${vaadin.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!--                            BUILD PLUGINS                                -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.14.1</version>
+        <configuration>
+          <release>${java.version}</release>
+        </configuration>
+      </plugin>
+
+      <!-- Vaadin Maven Plugin (Build frontend bundle) -->
+      <plugin>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-maven-plugin</artifactId>
+        <version>${vaadin.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>prepare-frontend</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!--                         PRODUCTION PROFILE                              -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <profiles>
+    <profile>
+      <id>production</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-maven-plugin</artifactId>
+            <version>${vaadin.version}</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>build-frontend</goal>
+                </goals>
+                <phase>compile</phase>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>
