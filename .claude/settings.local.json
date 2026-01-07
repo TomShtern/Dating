@@ -4,7 +4,14 @@
       "Skill(superpowers:brainstorming)",
       "Bash(./mvnw test:*)",
       "Bash(mvn test:*)",
-      "Bash(mvn test-compile:*)"
+      "Bash(mvn test-compile:*)",
+      "Bash(./mvnw test-compile:*)",
+      "Bash(find:*)",
+      "Skill(superpowers:writing-plans)",
+      "Skill(superpowers:executing-plans)",
+      "Bash(mvn clean compile:*)",
+      "Bash(mvn compile:*)",
+      "Bash(mvnw test:*)"
     ]
   },
   "outputStyle": "Explanatory"

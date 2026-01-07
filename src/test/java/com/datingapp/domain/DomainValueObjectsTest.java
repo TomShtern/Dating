@@ -14,7 +14,7 @@ class DomainValueObjectsTest {
         assertEquals(uuid, id.value());
         assertEquals(uuid.toString(), id.toString());
         assertNotNull(UserId.generate());
-        assertThrows(NullPointerException.class, () -> new UserId(null));
+        assertNotNull(assertThrows(NullPointerException.class, () -> new UserId(null)));
     }
 
     @Test
@@ -86,8 +86,8 @@ class DomainValueObjectsTest {
         // Approximately 3940 km
         assertEquals(3940, Math.round(distance.kilometers()), 50);
 
-        assertThrows(IllegalArgumentException.class, () -> new Location(91, 0));
-        assertThrows(IllegalArgumentException.class, () -> new Location(0, 181));
+        assertNotNull(assertThrows(IllegalArgumentException.class, () -> new Location(91, 0)));
+        assertNotNull(assertThrows(IllegalArgumentException.class, () -> new Location(0, 181)));
     }
 
     @Test
@@ -99,7 +99,7 @@ class DomainValueObjectsTest {
         assertTrue(d2.isGreaterThan(d1));
         assertNotEquals(d1, d2);
 
-        assertThrows(IllegalArgumentException.class, () -> new Distance(-1));
+        assertNotNull(assertThrows(IllegalArgumentException.class, () -> new Distance(-1)));
     }
 
     @Test
@@ -111,8 +111,8 @@ class DomainValueObjectsTest {
         assertFalse(range.contains(17));
         assertFalse(range.contains(31));
 
-        assertThrows(IllegalArgumentException.class, () -> AgeRange.of(17, 30));
-        assertThrows(IllegalArgumentException.class, () -> AgeRange.of(30, 20));
+        assertNotNull(assertThrows(IllegalArgumentException.class, () -> AgeRange.of(17, 30)));
+        assertNotNull(assertThrows(IllegalArgumentException.class, () -> AgeRange.of(30, 20)));
     }
 
     @Test

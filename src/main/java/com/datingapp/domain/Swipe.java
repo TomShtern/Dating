@@ -44,6 +44,16 @@ public class Swipe {
                 Instant.now());
     }
 
+    /**
+     * Reconstitute a swipe from persistence.
+     * Used when loading swipes from the database.
+     * This method bypasses validation since the data is already persisted.
+     */
+    public static Swipe reconstitute(SwipeId id, UserId swiperId, UserId targetId,
+            SwipeDirection direction, Instant createdAt) {
+        return new Swipe(id, swiperId, targetId, direction, createdAt);
+    }
+
     public SwipeId getId() {
         return id;
     }

@@ -1,0 +1,1161 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< com.datingapp:dating-app >----------------------
+[INFO] Building Dating App 1.0.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ dating-app ---
+[INFO] Copying 2 resources from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ dating-app ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ dating-app ---
+[INFO] Copying 1 resource from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ dating-app ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ dating-app ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.datingapp.DatingApplicationTests
+21:15:15.635 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.datingapp.DatingApplicationTests]: DatingApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:15:15.768 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.datingapp.DatingApplication for test class com.datingapp.DatingApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.1)
+
+2026-01-05T21:15:16.241+02:00  INFO 20736 --- [           main] com.datingapp.DatingApplicationTests     : Starting DatingApplicationTests using Java 21.0.9 with PID 20736 (started by tom7s in C:\Users\tom7s\Desktopp\Claude_Folder_2\Dating)
+2026-01-05T21:15:16.243+02:00 DEBUG 20736 --- [           main] com.datingapp.DatingApplicationTests     : Running with Spring Boot v4.0.1, Spring v7.0.2
+2026-01-05T21:15:16.243+02:00  INFO 20736 --- [           main] com.datingapp.DatingApplicationTests     : The following 1 profile is active: "test"
+2026-01-05T21:15:16.885+02:00  INFO 20736 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-01-05T21:15:16.980+02:00  INFO 20736 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 82 ms. Found 3 JPA repository interfaces.
+2026-01-05T21:15:17.515+02:00  INFO 20736 --- [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-01-05T21:15:17.618+02:00  INFO 20736 --- [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.0.Final
+2026-01-05T21:15:18.241+02:00  INFO 20736 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-01-05T21:15:18.289+02:00  INFO 20736 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-01-05T21:15:18.408+02:00  INFO 20736 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1b4ba615
+2026-01-05T21:15:18.409+02:00  INFO 20736 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-01-05T21:15:18.441+02:00  WARN 20736 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-01-05T21:15:18.470+02:00  INFO 20736 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/datingapp_test]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: datingapp_test/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-01-05T21:15:19.375+02:00  INFO 20736 --- [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: 
+    set client_min_messages = WARNING
+Hibernate: 
+    drop table if exists matches cascade
+Hibernate: 
+    drop table if exists swipes cascade
+Hibernate: 
+    drop table if exists users cascade
+Hibernate: 
+    create table matches (
+        created_at timestamp(6) with time zone not null,
+        useraid UUID not null,
+        userbid UUID not null,
+        id varchar(73) not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table swipes (
+        created_at timestamp(6) with time zone not null,
+        id UUID not null,
+        swiper_id UUID not null,
+        target_id UUID not null,
+        direction varchar(255) not null check ((direction in ('LIKE','DISLIKE','SUPER_LIKE'))),
+        primary key (id)
+    )
+Hibernate: 
+    create table users (
+        age_range_max integer,
+        age_range_min integer,
+        birth_date date,
+        latitude float(53),
+        longitude float(53),
+        max_distance_km float(53),
+        created_at timestamp(6) with time zone not null,
+        updated_at timestamp(6) with time zone not null,
+        id UUID not null,
+        username varchar(30) not null unique,
+        display_name varchar(100),
+        bio TEXT,
+        interested_in TEXT,
+        interests TEXT,
+        password_hash varchar(255) not null,
+        photo_urls TEXT,
+        state varchar(255) not null check ((state in ('REGISTERED','PROFILE_INCOMPLETE','ACTIVE','PAUSED','BANNED'))),
+        primary key (id)
+    )
+2026-01-05T21:15:19.419+02:00  INFO 20736 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-01-05T21:15:19.520+02:00  INFO 20736 --- [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-01-05T21:15:20.753+02:00  INFO 20736 --- [           main] com.datingapp.DatingApplicationTests     : Started DatingApplicationTests in 4.855 seconds (process running for 6.559)
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (C:\Users\tom7s\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.8\byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.892 s -- in com.datingapp.DatingApplicationTests
+[INFO] Running com.datingapp.domain.DomainAggregatesTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.026 s -- in com.datingapp.domain.DomainAggregatesTest
+[INFO] Running com.datingapp.domain.DomainValueObjectsTest
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.039 s -- in com.datingapp.domain.DomainValueObjectsTest
+[INFO] Running com.datingapp.domain.matching.MatchingServiceTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.259 s -- in com.datingapp.domain.matching.MatchingServiceTest
+[INFO] Running com.datingapp.domain.matching.MatchingStrategiesTest
+[INFO] Running com.datingapp.domain.matching.MatchingStrategiesTest$MatchScorerComposition
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.042 s -- in com.datingapp.domain.matching.MatchingStrategiesTest$MatchScorerComposition
+[INFO] Running com.datingapp.domain.matching.MatchingStrategiesTest$DistanceStrategyScoring
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.042 s -- in com.datingapp.domain.matching.MatchingStrategiesTest$DistanceStrategyScoring
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.093 s -- in com.datingapp.domain.matching.MatchingStrategiesTest
+[INFO] Running com.datingapp.domain.ProfilePreferencesTest
+[INFO] Running com.datingapp.domain.ProfilePreferencesTest$ProfileIsComplete
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.035 s -- in com.datingapp.domain.ProfilePreferencesTest$ProfileIsComplete
+[INFO] Running com.datingapp.domain.ProfilePreferencesTest$PreferencesMatching
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.025 s -- in com.datingapp.domain.ProfilePreferencesTest$PreferencesMatching
+[INFO] Running com.datingapp.domain.ProfilePreferencesTest$ProfilePhotoLimit
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.020 s -- in com.datingapp.domain.ProfilePreferencesTest$ProfilePhotoLimit
+[INFO] Running com.datingapp.domain.ProfilePreferencesTest$ProfileAge
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in com.datingapp.domain.ProfilePreferencesTest$ProfileAge
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.095 s -- in com.datingapp.domain.ProfilePreferencesTest
+[INFO] Running com.datingapp.domain.UserStateTransitionsTest
+[INFO] Running com.datingapp.domain.UserStateTransitionsTest$UpdatedAtTracking
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.051 s -- in com.datingapp.domain.UserStateTransitionsTest$UpdatedAtTracking
+[INFO] Running com.datingapp.domain.UserStateTransitionsTest$StatePermissions
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 s -- in com.datingapp.domain.UserStateTransitionsTest$StatePermissions
+[INFO] Running com.datingapp.domain.UserStateTransitionsTest$InvalidTransitions
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.024 s -- in com.datingapp.domain.UserStateTransitionsTest$InvalidTransitions
+[INFO] Running com.datingapp.domain.UserStateTransitionsTest$ValidTransitions
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 s -- in com.datingapp.domain.UserStateTransitionsTest$ValidTransitions
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.114 s -- in com.datingapp.domain.UserStateTransitionsTest
+[INFO] Running com.datingapp.FlowDemoTest
+
+? STARTING FULL MATCHING FLOW DEMO
+
+? Registered Alice (Manhattan)
+? Registered Bob (Brooklyn)
+
+? Alice is looking for prospects within 50km...
+? Alice found: Bob (6km away)
+
+?? Alice LIKES Bob...
+   (Recorded. Waiting for mutual interest...)
+
+?? Bob LIKES Alice back...
+? BOOM! IT'S A MATCH!
+   Match ID: 997c2f36-a107-4f3a-880f-e78245c981c9_f3048358-a8c9-4d14-a6a6-c849db5ac242
+
+? Alice now has 1 match in her list.
+
+? DEMO COMPLETED SUCCESSFULLY
+
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s -- in com.datingapp.FlowDemoTest
+[INFO] Running com.datingapp.infrastructure.persistence.inmemory.InMemoryRepositoriesTest
+[INFO] Running com.datingapp.infrastructure.persistence.inmemory.InMemoryRepositoriesTest$MatchRepositoryTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.039 s -- in com.datingapp.infrastructure.persistence.inmemory.InMemoryRepositoriesTest$MatchRepositoryTest
+[INFO] Running com.datingapp.infrastructure.persistence.inmemory.InMemoryRepositoriesTest$UserRepositoryTest
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.036 s -- in com.datingapp.infrastructure.persistence.inmemory.InMemoryRepositoriesTest$UserRepositoryTest
+[INFO] Running com.datingapp.infrastructure.persistence.inmemory.InMemoryRepositoriesTest$SwipeRepositoryTest
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 s -- in com.datingapp.infrastructure.persistence.inmemory.InMemoryRepositoriesTest$SwipeRepositoryTest
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.110 s -- in com.datingapp.infrastructure.persistence.inmemory.InMemoryRepositoriesTest
+[INFO] Running com.datingapp.infrastructure.persistence.jpa.MatchingFlowIntegrationTest
+2026-01-05T21:15:21.951+02:00  INFO 20736 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.datingapp.infrastructure.persistence.jpa.MatchingFlowIntegrationTest]: MatchingFlowIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-01-05T21:15:21.993+02:00  INFO 20736 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.datingapp.DatingApplication for test class com.datingapp.infrastructure.persistence.jpa.MatchingFlowIntegrationTest
+Hibernate: 
+    select
+        ue1_0.id,
+        ue1_0.age_range_max,
+        ue1_0.age_range_min,
+        ue1_0.bio,
+        ue1_0.birth_date,
+        ue1_0.created_at,
+        ue1_0.display_name,
+        ue1_0.interested_in,
+        ue1_0.interests,
+        ue1_0.latitude,
+        ue1_0.longitude,
+        ue1_0.max_distance_km,
+        ue1_0.password_hash,
+        ue1_0.photo_urls,
+        ue1_0.state,
+        ue1_0.updated_at,
+        ue1_0.username 
+    from
+        users ue1_0 
+    where
+        ue1_0.id=?
+Hibernate: 
+    select
+        ue1_0.id,
+        ue1_0.age_range_max,
+        ue1_0.age_range_min,
+        ue1_0.bio,
+        ue1_0.birth_date,
+        ue1_0.created_at,
+        ue1_0.display_name,
+        ue1_0.interested_in,
+        ue1_0.interests,
+        ue1_0.latitude,
+        ue1_0.longitude,
+        ue1_0.max_distance_km,
+        ue1_0.password_hash,
+        ue1_0.photo_urls,
+        ue1_0.state,
+        ue1_0.updated_at,
+        ue1_0.username 
+    from
+        users ue1_0 
+    where
+        ue1_0.id=?
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.swiper_id=? 
+        and se1_0.target_id=?
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.id=?
+Hibernate: 
+    insert 
+    into
+        users
+        (age_range_max, age_range_min, bio, birth_date, created_at, display_name, interested_in, interests, latitude, longitude, max_distance_km, password_hash, photo_urls, state, updated_at, username, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2026-01-05T21:15:22.426+02:00  WARN 20736 --- [           main] org.hibernate.orm.jdbc.error             : HHH000247: ErrorCode: 0, SQLState: 23502
+2026-01-05T21:15:22.426+02:00  WARN 20736 --- [           main] org.hibernate.orm.jdbc.error             : ERROR: null value in column "password_hash" of relation "users" violates not-null constraint
+  Detail: Failing row contains (null, null, 1990-01-01, 40.7128, -74.006, 100, 2026-01-05 21:15:22.383941+02, 2026-01-05 21:15:22.383941+02, fd3d5e0c-45a0-4880-a658-c2253bb342a4, alice, alice, Bio for alice, ALL, GAMING, null, photo1.jpg, ACTIVE).
+Hibernate: 
+    select
+        ue1_0.id,
+        ue1_0.age_range_max,
+        ue1_0.age_range_min,
+        ue1_0.bio,
+        ue1_0.birth_date,
+        ue1_0.created_at,
+        ue1_0.display_name,
+        ue1_0.interested_in,
+        ue1_0.interests,
+        ue1_0.latitude,
+        ue1_0.longitude,
+        ue1_0.max_distance_km,
+        ue1_0.password_hash,
+        ue1_0.photo_urls,
+        ue1_0.state,
+        ue1_0.updated_at,
+        ue1_0.username 
+    from
+        users ue1_0 
+    where
+        ue1_0.id=?
+Hibernate: 
+    select
+        ue1_0.id,
+        ue1_0.age_range_max,
+        ue1_0.age_range_min,
+        ue1_0.bio,
+        ue1_0.birth_date,
+        ue1_0.created_at,
+        ue1_0.display_name,
+        ue1_0.interested_in,
+        ue1_0.interests,
+        ue1_0.latitude,
+        ue1_0.longitude,
+        ue1_0.max_distance_km,
+        ue1_0.password_hash,
+        ue1_0.photo_urls,
+        ue1_0.state,
+        ue1_0.updated_at,
+        ue1_0.username 
+    from
+        users ue1_0 
+    where
+        ue1_0.id=?
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.swiper_id=? 
+        and se1_0.target_id=?
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.id=?
+Hibernate: 
+    insert 
+    into
+        users
+        (age_range_max, age_range_min, bio, birth_date, created_at, display_name, interested_in, interests, latitude, longitude, max_distance_km, password_hash, photo_urls, state, updated_at, username, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2026-01-05T21:15:22.486+02:00  WARN 20736 --- [           main] org.hibernate.orm.jdbc.error             : HHH000247: ErrorCode: 0, SQLState: 23502
+2026-01-05T21:15:22.487+02:00  WARN 20736 --- [           main] org.hibernate.orm.jdbc.error             : ERROR: null value in column "password_hash" of relation "users" violates not-null constraint
+  Detail: Failing row contains (null, null, 1990-01-01, 40.7128, -74.006, 100, 2026-01-05 21:15:22.483844+02, 2026-01-05 21:15:22.483844+02, 54463c60-98bd-4fd1-88a1-10cced12a982, alice, alice, Bio for alice, ALL, TRAVEL, null, photo1.jpg, ACTIVE).
+Hibernate: 
+    select
+        ue1_0.id,
+        ue1_0.age_range_max,
+        ue1_0.age_range_min,
+        ue1_0.bio,
+        ue1_0.birth_date,
+        ue1_0.created_at,
+        ue1_0.display_name,
+        ue1_0.interested_in,
+        ue1_0.interests,
+        ue1_0.latitude,
+        ue1_0.longitude,
+        ue1_0.max_distance_km,
+        ue1_0.password_hash,
+        ue1_0.photo_urls,
+        ue1_0.state,
+        ue1_0.updated_at,
+        ue1_0.username 
+    from
+        users ue1_0 
+    where
+        ue1_0.id=?
+Hibernate: 
+    select
+        ue1_0.id,
+        ue1_0.age_range_max,
+        ue1_0.age_range_min,
+        ue1_0.bio,
+        ue1_0.birth_date,
+        ue1_0.created_at,
+        ue1_0.display_name,
+        ue1_0.interested_in,
+        ue1_0.interests,
+        ue1_0.latitude,
+        ue1_0.longitude,
+        ue1_0.max_distance_km,
+        ue1_0.password_hash,
+        ue1_0.photo_urls,
+        ue1_0.state,
+        ue1_0.updated_at,
+        ue1_0.username 
+    from
+        users ue1_0 
+    where
+        ue1_0.id=?
+Hibernate: 
+    insert 
+    into
+        users
+        (age_range_max, age_range_min, bio, birth_date, created_at, display_name, interested_in, interests, latitude, longitude, max_distance_km, password_hash, photo_urls, state, updated_at, username, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2026-01-05T21:15:22.559+02:00  WARN 20736 --- [           main] org.hibernate.orm.jdbc.error             : HHH000247: ErrorCode: 0, SQLState: 23502
+2026-01-05T21:15:22.559+02:00  WARN 20736 --- [           main] org.hibernate.orm.jdbc.error             : ERROR: null value in column "password_hash" of relation "users" violates not-null constraint
+  Detail: Failing row contains (null, null, 1990-01-01, 40.7128, -74.006, 100, 2026-01-05 21:15:22.557185+02, 2026-01-05 21:15:22.557185+02, b3d39821-f7e7-48dc-9134-d3d6dc1c409d, alice, alice, Bio for alice, ALL, HIKING, null, photo1.jpg, ACTIVE).
+[ERROR] Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.636 s <<< FAILURE! -- in com.datingapp.infrastructure.persistence.jpa.MatchingFlowIntegrationTest
+[ERROR] com.datingapp.infrastructure.persistence.jpa.MatchingFlowIntegrationTest.swipeFlow_shouldNotCreateMatchOnDislike -- Time elapsed: 0.455 s <<< ERROR!
+org.springframework.dao.DataIntegrityViolationException: 
+could not execute statement [ERROR: null value in column "password_hash" of relation "users" violates not-null constraint
+  Detail: Failing row contains (null, null, 1990-01-01, 40.7128, -74.006, 100, 2026-01-05 21:15:22.383941+02, 2026-01-05 21:15:22.383941+02, fd3d5e0c-45a0-4880-a658-c2253bb342a4, alice, alice, Bio for alice, ALL, GAMING, null, photo1.jpg, ACTIVE).] [insert into users (age_range_max,age_range_min,bio,birth_date,created_at,display_name,interested_in,interests,latitude,longitude,max_distance_km,password_hash,photo_urls,state,updated_at,username,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; SQL [insert into users (age_range_max,age_range_min,bio,birth_date,created_at,display_name,interested_in,interests,latitude,longitude,max_distance_km,password_hash,photo_urls,state,updated_at,username,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; constraint [password_hash]
+	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.convertHibernateAccessException(HibernateExceptionTranslator.java:169)
+	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.convertHibernateAccessException(HibernateExceptionTranslator.java:131)
+	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.translateExceptionIfPossible(HibernateExceptionTranslator.java:105)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:199)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:556)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:346)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:157)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:137)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:222)
+	at jdk.proxy2/jdk.proxy2.$Proxy142.findBySwiperIdAndTargetId(Unknown Source)
+	at com.datingapp.infrastructure.persistence.jpa.JpaSwipeRepository.findByPair(JpaSwipeRepository.java:51)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:135)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719)
+	at com.datingapp.infrastructure.persistence.jpa.JpaSwipeRepository$$SpringCGLIB$$0.findByPair(<generated>)
+	at com.datingapp.domain.matching.MatchingService.processSwipe(MatchingService.java:69)
+	at com.datingapp.infrastructure.persistence.jpa.MatchingFlowIntegrationTest.swipeFlow_shouldNotCreateMatchOnDislike(MatchingFlowIntegrationTest.java:122)
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [ERROR: null value in column "password_hash" of relation "users" violates not-null constraint
+  Detail: Failing row contains (null, null, 1990-01-01, 40.7128, -74.006, 100, 2026-01-05 21:15:22.383941+02, 2026-01-05 21:15:22.383941+02, fd3d5e0c-45a0-4880-a658-c2253bb342a4, alice, alice, Bio for alice, ALL, GAMING, null, photo1.jpg, ACTIVE).] [insert into users (age_range_max,age_range_min,bio,birth_date,created_at,display_name,interested_in,interests,latitude,longitude,max_distance_km,password_hash,photo_urls,state,updated_at,username,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)]
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:73)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:34)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:115)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:184)
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.performNonBatchedMutation(AbstractMutationExecutor.java:145)
+	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorSingleNonBatched.performNonBatchedOperations(MutationExecutorSingleNonBatched.java:53)
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.execute(AbstractMutationExecutor.java:66)
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.execute(AbstractMutationExecutor.java:55)
+	at org.hibernate.persister.entity.mutation.InsertCoordinatorStandard.doStaticInserts(InsertCoordinatorStandard.java:180)
+	at org.hibernate.persister.entity.mutation.InsertCoordinatorStandard.coordinateInsert(InsertCoordinatorStandard.java:120)
+	at org.hibernate.persister.entity.mutation.InsertCoordinatorStandard.insert(InsertCoordinatorStandard.java:93)
+	at org.hibernate.action.internal.EntityInsertAction.execute(EntityInsertAction.java:108)
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:634)
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:505)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:381)
+	at org.hibernate.event.internal.DefaultAutoFlushEventListener.onAutoFlush(DefaultAutoFlushEventListener.java:56)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:138)
+	at org.hibernate.internal.SessionImpl.autoFlushIfRequired(SessionImpl.java:1440)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.lambda$new$1(ConcreteSqmSelectQueryPlan.java:126)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.withCacheableSqmInterpretation(ConcreteSqmSelectQueryPlan.java:427)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.performList(ConcreteSqmSelectQueryPlan.java:355)
+	at org.hibernate.query.sqm.internal.SqmQueryImpl.doList(SqmQueryImpl.java:374)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:153)
+	at org.hibernate.query.spi.AbstractSelectionQuery.getSingleResultOrNull(AbstractSelectionQuery.java:330)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution$SingleEntityExecution.doExecute(JpaQueryExecution.java:328)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:99)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:164)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:154)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:169)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:167)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:146)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:370)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:118)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:135)
+	... 17 more
+Caused by: org.postgresql.util.PSQLException: ERROR: null value in column "password_hash" of relation "users" violates not-null constraint
+  Detail: Failing row contains (null, null, 1990-01-01, 40.7128, -74.006, 100, 2026-01-05 21:15:22.383941+02, 2026-01-05 21:15:22.383941+02, fd3d5e0c-45a0-4880-a658-c2253bb342a4, alice, alice, Bio for alice, ALL, GAMING, null, photo1.jpg, ACTIVE).
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2736)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2421)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:525)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:435)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:196)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:157)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:181)
+	... 52 more
+
+[ERROR] com.datingapp.infrastructure.persistence.jpa.MatchingFlowIntegrationTest.swipeFlow_shouldPreventDuplicateMatches -- Time elapsed: 0.022 s <<< ERROR!
+org.springframework.dao.DataIntegrityViolationException: 
+could not execute statement [ERROR: null value in column "password_hash" of relation "users" violates not-null constraint
+  Detail: Failing row contains (null, null, 1990-01-01, 40.7128, -74.006, 100, 2026-01-05 21:15:22.483844+02, 2026-01-05 21:15:22.483844+02, 54463c60-98bd-4fd1-88a1-10cced12a982, alice, alice, Bio for alice, ALL, TRAVEL, null, photo1.jpg, ACTIVE).] [insert into users (age_range_max,age_range_min,bio,birth_date,created_at,display_name,interested_in,interests,latitude,longitude,max_distance_km,password_hash,photo_urls,state,updated_at,username,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; SQL [insert into users (age_range_max,age_range_min,bio,birth_date,created_at,display_name,interested_in,interests,latitude,longitude,max_distance_km,password_hash,photo_urls,state,updated_at,username,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; constraint [password_hash]
+	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.convertHibernateAccessException(HibernateExceptionTranslator.java:169)
+	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.convertHibernateAccessException(HibernateExceptionTranslator.java:131)
+	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.translateExceptionIfPossible(HibernateExceptionTranslator.java:105)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:199)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:556)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:346)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:157)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:137)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:222)
+	at jdk.proxy2/jdk.proxy2.$Proxy142.findBySwiperIdAndTargetId(Unknown Source)
+	at com.datingapp.infrastructure.persistence.jpa.JpaSwipeRepository.findByPair(JpaSwipeRepository.java:51)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:135)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719)
+	at com.datingapp.infrastructure.persistence.jpa.JpaSwipeRepository$$SpringCGLIB$$0.findByPair(<generated>)
+	at com.datingapp.domain.matching.MatchingService.processSwipe(MatchingService.java:69)
+	at com.datingapp.infrastructure.persistence.jpa.MatchingFlowIntegrationTest.swipeFlow_shouldPreventDuplicateMatches(MatchingFlowIntegrationTest.java:140)
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [ERROR: null value in column "password_hash" of relation "users" violates not-null constraint
+  Detail: Failing row contains (null, null, 1990-01-01, 40.7128, -74.006, 100, 2026-01-05 21:15:22.483844+02, 2026-01-05 21:15:22.483844+02, 54463c60-98bd-4fd1-88a1-10cced12a982, alice, alice, Bio for alice, ALL, TRAVEL, null, photo1.jpg, ACTIVE).] [insert into users (age_range_max,age_range_min,bio,birth_date,created_at,display_name,interested_in,interests,latitude,longitude,max_distance_km,password_hash,photo_urls,state,updated_at,username,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)]
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:73)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:34)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:115)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:184)
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.performNonBatchedMutation(AbstractMutationExecutor.java:145)
+	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorSingleNonBatched.performNonBatchedOperations(MutationExecutorSingleNonBatched.java:53)
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.execute(AbstractMutationExecutor.java:66)
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.execute(AbstractMutationExecutor.java:55)
+	at org.hibernate.persister.entity.mutation.InsertCoordinatorStandard.doStaticInserts(InsertCoordinatorStandard.java:180)
+	at org.hibernate.persister.entity.mutation.InsertCoordinatorStandard.coordinateInsert(InsertCoordinatorStandard.java:120)
+	at org.hibernate.persister.entity.mutation.InsertCoordinatorStandard.insert(InsertCoordinatorStandard.java:93)
+	at org.hibernate.action.internal.EntityInsertAction.execute(EntityInsertAction.java:108)
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:634)
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:505)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:381)
+	at org.hibernate.event.internal.DefaultAutoFlushEventListener.onAutoFlush(DefaultAutoFlushEventListener.java:56)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:138)
+	at org.hibernate.internal.SessionImpl.autoFlushIfRequired(SessionImpl.java:1440)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.lambda$new$1(ConcreteSqmSelectQueryPlan.java:126)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.withCacheableSqmInterpretation(ConcreteSqmSelectQueryPlan.java:427)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.performList(ConcreteSqmSelectQueryPlan.java:355)
+	at org.hibernate.query.sqm.internal.SqmQueryImpl.doList(SqmQueryImpl.java:374)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:153)
+	at org.hibernate.query.spi.AbstractSelectionQuery.getSingleResultOrNull(AbstractSelectionQuery.java:330)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution$SingleEntityExecution.doExecute(JpaQueryExecution.java:328)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:99)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:164)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:154)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:169)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:167)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:146)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:370)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:118)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:135)
+	... 17 more
+Caused by: org.postgresql.util.PSQLException: ERROR: null value in column "password_hash" of relation "users" violates not-null constraint
+  Detail: Failing row contains (null, null, 1990-01-01, 40.7128, -74.006, 100, 2026-01-05 21:15:22.483844+02, 2026-01-05 21:15:22.483844+02, 54463c60-98bd-4fd1-88a1-10cced12a982, alice, alice, Bio for alice, ALL, TRAVEL, null, photo1.jpg, ACTIVE).
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2736)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2421)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:525)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:435)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:196)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:157)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:181)
+	... 52 more
+
+[ERROR] com.datingapp.infrastructure.persistence.jpa.MatchingFlowIntegrationTest.completeMatchingFlow_shouldCreateMatchOnMutualLike -- Time elapsed: 0.072 s <<< ERROR!
+org.springframework.dao.DataIntegrityViolationException: 
+could not execute statement [ERROR: null value in column "password_hash" of relation "users" violates not-null constraint
+  Detail: Failing row contains (null, null, 1990-01-01, 40.7128, -74.006, 100, 2026-01-05 21:15:22.557185+02, 2026-01-05 21:15:22.557185+02, b3d39821-f7e7-48dc-9134-d3d6dc1c409d, alice, alice, Bio for alice, ALL, HIKING, null, photo1.jpg, ACTIVE).] [insert into users (age_range_max,age_range_min,bio,birth_date,created_at,display_name,interested_in,interests,latitude,longitude,max_distance_km,password_hash,photo_urls,state,updated_at,username,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; SQL [insert into users (age_range_max,age_range_min,bio,birth_date,created_at,display_name,interested_in,interests,latitude,longitude,max_distance_km,password_hash,photo_urls,state,updated_at,username,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; constraint [password_hash]
+	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.convertHibernateAccessException(HibernateExceptionTranslator.java:169)
+	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.convertHibernateAccessException(HibernateExceptionTranslator.java:131)
+	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.translateExceptionIfPossible(HibernateExceptionTranslator.java:105)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:199)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:556)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:346)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:157)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:137)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:222)
+	at jdk.proxy2/jdk.proxy2.$Proxy143.findDiscoverableInRadius(Unknown Source)
+	at com.datingapp.infrastructure.persistence.jpa.JpaUserRepository.findDiscoverableInRadius(JpaUserRepository.java:69)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:135)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719)
+	at com.datingapp.infrastructure.persistence.jpa.JpaUserRepository$$SpringCGLIB$$0.findDiscoverableInRadius(<generated>)
+	at com.datingapp.domain.matching.MatchingService.findProspects(MatchingService.java:46)
+	at com.datingapp.infrastructure.persistence.jpa.MatchingFlowIntegrationTest.completeMatchingFlow_shouldCreateMatchOnMutualLike(MatchingFlowIntegrationTest.java:64)
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [ERROR: null value in column "password_hash" of relation "users" violates not-null constraint
+  Detail: Failing row contains (null, null, 1990-01-01, 40.7128, -74.006, 100, 2026-01-05 21:15:22.557185+02, 2026-01-05 21:15:22.557185+02, b3d39821-f7e7-48dc-9134-d3d6dc1c409d, alice, alice, Bio for alice, ALL, HIKING, null, photo1.jpg, ACTIVE).] [insert into users (age_range_max,age_range_min,bio,birth_date,created_at,display_name,interested_in,interests,latitude,longitude,max_distance_km,password_hash,photo_urls,state,updated_at,username,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)]
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:73)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:34)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:115)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:184)
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.performNonBatchedMutation(AbstractMutationExecutor.java:145)
+	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorSingleNonBatched.performNonBatchedOperations(MutationExecutorSingleNonBatched.java:53)
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.execute(AbstractMutationExecutor.java:66)
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.execute(AbstractMutationExecutor.java:55)
+	at org.hibernate.persister.entity.mutation.InsertCoordinatorStandard.doStaticInserts(InsertCoordinatorStandard.java:180)
+	at org.hibernate.persister.entity.mutation.InsertCoordinatorStandard.coordinateInsert(InsertCoordinatorStandard.java:120)
+	at org.hibernate.persister.entity.mutation.InsertCoordinatorStandard.insert(InsertCoordinatorStandard.java:93)
+	at org.hibernate.action.internal.EntityInsertAction.execute(EntityInsertAction.java:108)
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:634)
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:505)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:381)
+	at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:40)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:138)
+	at org.hibernate.internal.SessionImpl.fireFlush(SessionImpl.java:1489)
+	at org.hibernate.internal.SessionImpl.flush(SessionImpl.java:1477)
+	at org.hibernate.query.sql.internal.NativeQueryImpl.prepareForExecution(NativeQueryImpl.java:726)
+	at org.hibernate.query.spi.AbstractSelectionQuery.beforeQuery(AbstractSelectionQuery.java:182)
+	at org.hibernate.query.spi.AbstractSelectionQuery.beforeQueryHandlingFetchProfiles(AbstractSelectionQuery.java:169)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:150)
+	at org.hibernate.query.Query.getResultList(Query.java:121)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution$CollectionExecution.doExecute(JpaQueryExecution.java:132)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:99)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:164)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:154)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:169)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:167)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:146)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:370)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:118)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:135)
+	... 17 more
+Caused by: org.postgresql.util.PSQLException: ERROR: null value in column "password_hash" of relation "users" violates not-null constraint
+  Detail: Failing row contains (null, null, 1990-01-01, 40.7128, -74.006, 100, 2026-01-05 21:15:22.557185+02, 2026-01-05 21:15:22.557185+02, b3d39821-f7e7-48dc-9134-d3d6dc1c409d, alice, alice, Bio for alice, ALL, HIKING, null, photo1.jpg, ACTIVE).
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2736)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2421)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:525)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:435)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:196)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:157)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:181)
+	... 52 more
+
+[INFO] Running com.datingapp.infrastructure.persistence.jpa.MatchRepositoryIntegrationTest
+2026-01-05T21:15:22.574+02:00  INFO 20736 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.datingapp.infrastructure.persistence.jpa.MatchRepositoryIntegrationTest]: MatchRepositoryIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-01-05T21:15:22.579+02:00  INFO 20736 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.datingapp.DatingApplication for test class com.datingapp.infrastructure.persistence.jpa.MatchRepositoryIntegrationTest
+Hibernate: 
+    select
+        me1_0.id,
+        me1_0.created_at,
+        me1_0.useraid,
+        me1_0.userbid 
+    from
+        matches me1_0 
+    where
+        me1_0.id=?
+Hibernate: 
+    select
+        me1_0.id,
+        me1_0.created_at,
+        me1_0.useraid,
+        me1_0.userbid 
+    from
+        matches me1_0 
+    where
+        me1_0.id=?
+Hibernate: 
+    select
+        me1_0.id,
+        me1_0.created_at,
+        me1_0.useraid,
+        me1_0.userbid 
+    from
+        matches me1_0 
+    where
+        me1_0.id=?
+Hibernate: 
+    select
+        me1_0.id,
+        me1_0.created_at,
+        me1_0.useraid,
+        me1_0.userbid 
+    from
+        matches me1_0 
+    where
+        me1_0.id=?
+Hibernate: 
+    select
+        me1_0.id,
+        me1_0.created_at,
+        me1_0.useraid,
+        me1_0.userbid 
+    from
+        matches me1_0 
+    where
+        me1_0.id=?
+Hibernate: 
+    select
+        me1_0.id,
+        me1_0.created_at,
+        me1_0.useraid,
+        me1_0.userbid 
+    from
+        matches me1_0 
+    where
+        me1_0.id=?
+Hibernate: 
+    insert 
+    into
+        matches
+        (created_at, useraid, userbid, id) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        matches
+        (created_at, useraid, userbid, id) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        matches
+        (created_at, useraid, userbid, id) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    select
+        me1_0.id,
+        me1_0.created_at,
+        me1_0.useraid,
+        me1_0.userbid 
+    from
+        matches me1_0 
+    where
+        me1_0.useraid=? 
+        or me1_0.userbid=?
+Hibernate: 
+    select
+        me1_0.id,
+        me1_0.created_at,
+        me1_0.useraid,
+        me1_0.userbid 
+    from
+        matches me1_0 
+    where
+        me1_0.id=?
+Hibernate: 
+    select
+        me1_0.id,
+        me1_0.created_at,
+        me1_0.useraid,
+        me1_0.userbid 
+    from
+        matches me1_0 
+    where
+        me1_0.id=?
+Hibernate: 
+    select
+        me1_0.id,
+        me1_0.created_at,
+        me1_0.useraid,
+        me1_0.userbid 
+    from
+        matches me1_0 
+    where
+        me1_0.id=?
+Hibernate: 
+    select
+        me1_0.id,
+        me1_0.created_at,
+        me1_0.useraid,
+        me1_0.userbid 
+    from
+        matches me1_0 
+    where
+        me1_0.useraid=? 
+        or me1_0.userbid=?
+Hibernate: 
+    select
+        me1_0.id,
+        me1_0.created_at,
+        me1_0.useraid,
+        me1_0.userbid 
+    from
+        matches me1_0 
+    where
+        me1_0.id=?
+Hibernate: 
+    select
+        me1_0.id,
+        me1_0.created_at,
+        me1_0.useraid,
+        me1_0.userbid 
+    from
+        matches me1_0 
+    where
+        me1_0.id=?
+Hibernate: 
+    select
+        me1_0.id,
+        me1_0.created_at,
+        me1_0.useraid,
+        me1_0.userbid 
+    from
+        matches me1_0 
+    where
+        me1_0.id=?
+Hibernate: 
+    select
+        me1_0.id,
+        me1_0.created_at,
+        me1_0.useraid,
+        me1_0.userbid 
+    from
+        matches me1_0 
+    where
+        me1_0.id=?
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.121 s -- in com.datingapp.infrastructure.persistence.jpa.MatchRepositoryIntegrationTest
+[INFO] Running com.datingapp.infrastructure.persistence.jpa.SwipeRepositoryIntegrationTest
+2026-01-05T21:15:22.698+02:00  INFO 20736 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.datingapp.infrastructure.persistence.jpa.SwipeRepositoryIntegrationTest]: SwipeRepositoryIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-01-05T21:15:22.703+02:00  INFO 20736 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.datingapp.DatingApplication for test class com.datingapp.infrastructure.persistence.jpa.SwipeRepositoryIntegrationTest
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.swiper_id=? 
+        and se1_0.target_id=?
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.id=?
+Hibernate: 
+    insert 
+    into
+        swipes
+        (created_at, direction, swiper_id, target_id, id) 
+    values
+        (?, ?, ?, ?, ?)
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.swiper_id=? 
+        and se1_0.target_id=?
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.id=?
+Hibernate: 
+    insert 
+    into
+        swipes
+        (created_at, direction, swiper_id, target_id, id) 
+    values
+        (?, ?, ?, ?, ?)
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.swiper_id=?
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.swiper_id=? 
+        and se1_0.target_id=?
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.id=?
+Hibernate: 
+    insert 
+    into
+        swipes
+        (created_at, direction, swiper_id, target_id, id) 
+    values
+        (?, ?, ?, ?, ?)
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.swiper_id=? 
+        and se1_0.target_id=?
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.swiper_id=? 
+        and se1_0.target_id=?
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.swiper_id=? 
+        and se1_0.target_id=?
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.id=?
+Hibernate: 
+    insert 
+    into
+        swipes
+        (created_at, direction, swiper_id, target_id, id) 
+    values
+        (?, ?, ?, ?, ?)
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.swiper_id=? 
+        and se1_0.target_id=?
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.id=?
+Hibernate: 
+    insert 
+    into
+        swipes
+        (created_at, direction, swiper_id, target_id, id) 
+    values
+        (?, ?, ?, ?, ?)
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.swiper_id=? 
+        and se1_0.target_id=?
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.id=?
+Hibernate: 
+    insert 
+    into
+        swipes
+        (created_at, direction, swiper_id, target_id, id) 
+    values
+        (?, ?, ?, ?, ?)
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.target_id=? 
+        and (
+            se1_0.direction='LIKE' 
+            or se1_0.direction='SUPER_LIKE'
+        )
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.swiper_id=? 
+        and se1_0.target_id=?
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.id=?
+Hibernate: 
+    insert 
+    into
+        swipes
+        (created_at, direction, swiper_id, target_id, id) 
+    values
+        (?, ?, ?, ?, ?)
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.swiper_id=? 
+        and se1_0.target_id=?
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.swiper_id=? 
+        and se1_0.target_id=?
+Hibernate: 
+    select
+        se1_0.id,
+        se1_0.created_at,
+        se1_0.direction,
+        se1_0.swiper_id,
+        se1_0.target_id 
+    from
+        swipes se1_0 
+    where
+        se1_0.id=?
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.175 s -- in com.datingapp.infrastructure.persistence.jpa.SwipeRepositoryIntegrationTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Errors: 
+[ERROR]   MatchingFlowIntegrationTest.completeMatchingFlow_shouldCreateMatchOnMutualLike:64 ╗ DataIntegrityViolation could not execute statement [ERROR: null value in column "password_hash" of relation "users" violates not-null constraint
+  Detail: Failing row contains (null, null, 1990-01-01, 40.7128, -74.006, 100, 2026-01-05 21:15:22.557185+02, 2026-01-05 21:15:22.557185+02, b3d39821-f7e7-48dc-9134-d3d6dc1c409d, alice, alice, Bio for alice, ALL, HIKING, null, photo1.jpg, ACTIVE).] [insert into users (age_range_max,age_range_min,bio,birth_date,created_at,display_name,interested_in,interests,latitude,longitude,max_distance_km,password_hash,photo_urls,state,updated_at,username,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; SQL [insert into users (age_range_max,age_range_min,bio,birth_date,created_at,display_name,interested_in,interests,latitude,longitude,max_distance_km,password_hash,photo_urls,state,updated_at,username,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; constraint [password_hash]
+[ERROR]   MatchingFlowIntegrationTest.swipeFlow_shouldNotCreateMatchOnDislike:122 ╗ DataIntegrityViolation could not execute statement [ERROR: null value in column "password_hash" of relation "users" violates not-null constraint
+  Detail: Failing row contains (null, null, 1990-01-01, 40.7128, -74.006, 100, 2026-01-05 21:15:22.383941+02, 2026-01-05 21:15:22.383941+02, fd3d5e0c-45a0-4880-a658-c2253bb342a4, alice, alice, Bio for alice, ALL, GAMING, null, photo1.jpg, ACTIVE).] [insert into users (age_range_max,age_range_min,bio,birth_date,created_at,display_name,interested_in,interests,latitude,longitude,max_distance_km,password_hash,photo_urls,state,updated_at,username,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; SQL [insert into users (age_range_max,age_range_min,bio,birth_date,created_at,display_name,interested_in,interests,latitude,longitude,max_distance_km,password_hash,photo_urls,state,updated_at,username,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; constraint [password_hash]
+[ERROR]   MatchingFlowIntegrationTest.swipeFlow_shouldPreventDuplicateMatches:140 ╗ DataIntegrityViolation could not execute statement [ERROR: null value in column "password_hash" of relation "users" violates not-null constraint
+  Detail: Failing row contains (null, null, 1990-01-01, 40.7128, -74.006, 100, 2026-01-05 21:15:22.483844+02, 2026-01-05 21:15:22.483844+02, 54463c60-98bd-4fd1-88a1-10cced12a982, alice, alice, Bio for alice, ALL, TRAVEL, null, photo1.jpg, ACTIVE).] [insert into users (age_range_max,age_range_min,bio,birth_date,created_at,display_name,interested_in,interests,latitude,longitude,max_distance_km,password_hash,photo_urls,state,updated_at,username,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; SQL [insert into users (age_range_max,age_range_min,bio,birth_date,created_at,display_name,interested_in,interests,latitude,longitude,max_distance_km,password_hash,photo_urls,state,updated_at,username,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; constraint [password_hash]
+[INFO] 
+[ERROR] Tests run: 123, Failures: 0, Errors: 3, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  10.638 s
+[INFO] Finished at: 2026-01-05T21:15:23+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.4:test (default-test) on project dating-app: 
+[ERROR] 
+[ERROR] See C:\Users\tom7s\Desktopp\Claude_Folder_2\Dating\target\surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

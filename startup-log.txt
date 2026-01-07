@@ -1,0 +1,109 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< com.datingapp:dating-app >----------------------
+[INFO] Building Dating App 1.0.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:4.0.1:run (default-cli) > test-compile @ dating-app >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ dating-app ---
+[INFO] Copying 2 resources from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- vaadin:25.0.2:prepare-frontend (default) @ dating-app ---
+[INFO] Reflections took 1577 ms to scan 149 urls, producing 10676 keys and 44904 values
+[WARNING] This project has a legacy frontend directory (./frontend/) present and it will be used as a fallback. Support for the legacy directory will be removed in a future release. Please move its contents to the default frontend directory (./src/main/frontend/), or delete it if its contents are not needed in the project. Also remove 'frontendDirectory' parameter that points to the legacy directory, if present.
+[INFO] Visited 94 classes. Took 150 ms.
+[INFO] Copying frontend resources from jar files ...
+[INFO] Visited 152 resources. Took 104 ms.
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ dating-app ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ dating-app ---
+[INFO] Copying 1 resource from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ dating-app ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] <<< spring-boot:4.0.1:run (default-cli) < test-compile @ dating-app <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:4.0.1:run (default-cli) @ dating-app ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.1)
+
+2026-01-05T20:55:10.981+02:00  INFO 33896 --- [           main] com.datingapp.DatingApplication          : Starting DatingApplication using Java 21.0.9 with PID 33896 (C:\Users\tom7s\Desktopp\Claude_Folder_2\Dating\target\classes started by tom7s in C:\Users\tom7s\Desktopp\Claude_Folder_2\Dating)
+2026-01-05T20:55:10.984+02:00 DEBUG 33896 --- [           main] com.datingapp.DatingApplication          : Running with Spring Boot v4.0.1, Spring v7.0.2
+2026-01-05T20:55:10.984+02:00  INFO 33896 --- [           main] com.datingapp.DatingApplication          : The following 1 profile is active: "cli"
+2026-01-05T20:55:11.639+02:00  INFO 33896 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-01-05T20:55:11.697+02:00  INFO 33896 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 50 ms. Found 3 JPA repository interfaces.
+2026-01-05T20:55:12.139+02:00  INFO 33896 --- [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-01-05T20:55:12.174+02:00  INFO 33896 --- [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.0.Final
+2026-01-05T20:55:12.597+02:00  INFO 33896 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-01-05T20:55:12.652+02:00  INFO 33896 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-01-05T20:55:12.883+02:00  INFO 33896 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6121a7dd
+2026-01-05T20:55:12.883+02:00  INFO 33896 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-01-05T20:55:12.923+02:00  WARN 33896 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-01-05T20:55:12.952+02:00  INFO 33896 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/datingapp]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: datingapp/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-01-05T20:55:13.886+02:00  INFO 33896 --- [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-01-05T20:55:13.935+02:00  INFO 33896 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-01-05T20:55:14.011+02:00  INFO 33896 --- [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-01-05T20:55:14.793+02:00  WARN 33896 --- [           main] s.c.a.AnnotationConfigApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'vaadinDefaultRequestCache': Unsatisfied dependency expressed through field 'requestUtil': Error creating bean with name 'requestUtil': Unsatisfied dependency expressed through field 'springServletRegistration': No qualifying bean of type 'org.springframework.boot.web.servlet.ServletRegistrationBean<com.vaadin.flow.spring.SpringServlet>' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2026-01-05T20:55:14.793+02:00  INFO 33896 --- [           main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-01-05T20:55:14.797+02:00  INFO 33896 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-01-05T20:55:14.800+02:00  INFO 33896 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-01-05T20:55:14.808+02:00  INFO 33896 --- [           main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-01-05T20:55:14.823+02:00 ERROR 33896 --- [           main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field springServletRegistration in com.vaadin.flow.spring.security.RequestUtil required a bean of type 'org.springframework.boot.web.servlet.ServletRegistrationBean' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'org.springframework.boot.web.servlet.ServletRegistrationBean' in your configuration.
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  9.541 s
+[INFO] Finished at: 2026-01-05T20:55:14+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:4.0.1:run (default-cli) on project dating-app: Process terminated with exit code: 1 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
